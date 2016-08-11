@@ -1,11 +1,14 @@
 # html-attr-scope-loader
+
 webpack的自定义loader模块，给html文件中标签加入自定义属性以起到隔离作用域的作用，依赖于 css-attr-scope-loader
 
 ---
 
 ### 一、expmale：
+
 html文件：
-```
+
+```html
 <link href="./index.scss">
 <link href="./index.css">
 <div>
@@ -14,8 +17,10 @@ html文件：
     </ul>
 </div>
 ```
+
 css文件：
-```
+
+```css
 div {}
 
 .title {}
@@ -37,7 +42,7 @@ div#article > ul::before ~ li,
 
 html 文件：
 
-```
+```html
 <div _7c1ac95d75>
     <ul _7c1ac95d75>
         <li _7c1ac95d75><p _7c1ac95d75></p></li>
@@ -47,7 +52,7 @@ html 文件：
 
 css 文件：
 
-```
+```css
 div[_7c1ac95d75] {}
 
 .title[_7c1ac95d75] {}
@@ -69,7 +74,7 @@ div#article > ul[_7c1ac95d75]::before ~ li[_7c1ac95d75],
 
 ### 二、参数：
 
-```
+```javascript
 loader: 'html-attr-scope?scopeLen=10'
 ```
 
@@ -87,7 +92,7 @@ webpack 的 loader 肯定是要结合 webpack 来使用。
 
 首先在 webpack.config.js 文件中设置如下：
 
-```
+```javascript
 config.module = {
     loaders: [{
         test: /\.html$/,
@@ -116,7 +121,7 @@ html 文件和其所引入的 css 文件会被标记上同样的自定义属性`
 
 如：
 
-```
+```css
 :global(.xusheng) .xu > .sheng {}
 
 :global {
@@ -127,7 +132,7 @@ html 文件和其所引入的 css 文件会被标记上同样的自定义属性`
 
 会变为：
 
-```
+```css
 .xusheng .xu[_xxxxxxxxxx] > .sheng[_xxxxxxxxxx] {}
 
 .xu {}
