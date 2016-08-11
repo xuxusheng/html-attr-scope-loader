@@ -1,6 +1,6 @@
 {
   "name": "html-attr-scope-loader",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "webpack的自定义loader模块，给html文件中标签加入自定义属性以起到隔离作用域的作用，依赖于 css-attr-scope-loader",
   "main": "index.js",
   "scripts": {
@@ -18,6 +18,9 @@
   "homepage": "https://github.com/xuxusheng/html-attr-scope-loader#readme",
   "devDependencies": {
     "extract-text-webpack-plugin": "^1.0.1",
-    "loader-utils": "^0.2.15"
+    "loader-utils": "^0.2.15",
+    "postcss": "^5.1.2",
+    "postcss-scss": "^0.1.9",
+    "precss": "^1.4.0"
   }
 }

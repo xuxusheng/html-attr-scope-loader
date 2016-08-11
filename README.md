@@ -83,6 +83,8 @@ loader: 'html-attr-scope?scopeLen=10'
 
 webpack 的 loader 肯定是要结合 webpack 来使用。
 
+> 默认采用 postcss 来支持 scss， 所有先要在 webpack 中配置好 postcss 以及其对 scss 的支持。
+
 首先在 webpack.config.js 文件中设置如下：
 
 ```
