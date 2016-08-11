@@ -2,6 +2,10 @@
 
 webpack的自定义loader模块，给html文件中标签加入自定义属性以起到隔离作用域的作用，依赖于 css-attr-scope-loader
 
+参考：http://github.com/xuxusheng/css-attr-scope-loader
+
+如果 webpack 不熟，可以参考：http://github.com/xuxusheng/webpack-test
+
 ---
 
 ### 一、expmale：
