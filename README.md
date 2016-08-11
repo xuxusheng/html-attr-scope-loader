@@ -166,9 +166,9 @@ html 文件和其所引入的 css 文件会被标记上同样的自定义属性`
 
 1. 自定义属性具体是通过什么来决定的？
 
-答：当在 js 文件中 `require('./xxx.html')` 时，在 `html-attr-scope-loader` 中会使用 `nodejs` 的 `crypto` 模块，根据当前 html 文件中的字符串生成一串 `hash `值，此值前面在加上下划线之后即为自定义属性。
+ 答：当在 js 文件中 `require('./xxx.html')` 时，在 `html-attr-scope-loader` 中会使用 `nodejs` 的 `crypto` 模块，根据当前 html 文件中的字符串生成一串 `hash `值，此值前面在加上下划线之后即为自定义属性。
 
 2. 为什么自定义属性前面要加上下划线？
 
-答：因为如果不加下划线的话，有时候生成的hash值会是数字开头的，而 html 中采用数字开头的自定义属性是 invalid 的。
+ 答：因为如果不加下划线的话，有时候生成的hash值会是数字开头的，而 html 中采用数字开头的自定义属性是 invalid 的。
 
