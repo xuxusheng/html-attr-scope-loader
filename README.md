@@ -8,6 +8,8 @@ webpack的自定义loader模块，给html文件中标签加入自定义属性以
 
 ---
 
+> npm install html-attr-scope-loader --save-dev
+
 ### 一、expmale：
 
 html文件：
