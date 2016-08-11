@@ -33,9 +33,7 @@ div.wrap ul.list li.item {}
 
 .after::after {}
 
-div#article > ul::before ~ li,
-.xusheng::after,
-.xu > .sheng::before {}
+div#article > ul::before ~ li, .xusheng::after, .xu > .sheng::before {}
 ```
 
 **转换后：**
@@ -65,9 +63,7 @@ div.wrap[_7c1ac95d75] ul.list[_7c1ac95d75] li.item[_7c1ac95d75] {}
 
 .after[_7c1ac95d75]::after {}
 
-div#article > ul[_7c1ac95d75]::before ~ li[_7c1ac95d75],
-.xusheng[_7c1ac95d75]::after,
-.xu[_7c1ac95d75] > .sheng[_7c1ac95d75]::before {}
+div#article > ul[_7c1ac95d75]::before ~ li[_7c1ac95d75], .xusheng[_7c1ac95d75]::after, .xu[_7c1ac95d75] > .sheng[_7c1ac95d75]::before {}
 ```
 
 ---
@@ -149,9 +145,20 @@ html 文件和其所引入的 css 文件会被标记上同样的自定义属性`
 
 3. css 文件中选择器后面会被加上相应的属性选择器。
 
-4. 如果选择器有多级的话，那么只会在每一级的最后面加上一个属性选择器，同样的，如果这一级存在ID选择器的话，就不会再在末尾加上属性选择器，例如：`.xuxusheng > .xusheng.sheng {}` 会变为 `.xusheng[_xxxxxxxxxx] > .xusheng.xu[_xxxxxxxxxx]`，而`.xuxusheng > #xusheng.sheng {}` 会变为 `.xuxusheng[_xxxxxxxxxx] > #xusheng.sheng {}`。
+4. 如果选择器有多级的话，那么只会在每一级的最后面加上一个属性选择器，同样的，如果这一级存在ID选择器的话，就不会再在末尾加上属性选择器，例如：
+ `.xuxusheng > .xusheng.sheng {}` 
+ 会变为
+ `.xusheng[_xxxxxxxxxx] > .xusheng.xu[_xxxxxxxxxx]`，
+ 而
+ `.xuxusheng > #xusheng.sheng {}` 
+ 会变为 
+ `.xuxusheng[_xxxxxxxxxx] > #xusheng.sheng {}`。
 
-5. 如果在伪元素后面加上属性选择器的话，样式会失效，如`.xusheng::after[_xxxxxxxxxx] {}`，所以在遇到伪元素的时候，会将属性选择器向前移动一位，不在最后，如：`.xusheng[_xxxxxxxxxx]::after`。因为对伪类以及伪元素的判定是基于一个冒号还是两个冒号的，所以在使用伪元素时尽量使用规范的两个冒号，尽管一个冒号浏览器也可以识别。
+5. 如果在伪元素后面加上属性选择器的话，样式会失效，如
+ ```css
+ .xusheng::after[_xxxxxxxxxx] {}
+ ```
+ 所以在遇到伪元素的时候，会将属性选择器向前移动一位，不在最后，如：`.xusheng[_xxxxxxxxxx]::after`。因为对伪类以及伪元素的判定是基于一个冒号还是两个冒号的，所以在使用伪元素时尽量使用规范的两个冒号，尽管一个冒号浏览器也可以识别。
 
 ---
 
@@ -159,7 +166,7 @@ html 文件和其所引入的 css 文件会被标记上同样的自定义属性`
 
 1. 自定义属性具体是通过什么来决定的？
 
-答：当在 js 文件中 require('./xxx.html') 时，在 html-attr-scope-loader 中会使用 nodejs 的 `crypto` 模块，根据当前 html 文件中的字符串生成一串hash值，此值前面在加上下划线之后即为自定义属性。
+答：当在 js 文件中 `require('./xxx.html')` 时，在 `html-attr-scope-loader` 中会使用 `nodejs` 的 `crypto` 模块，根据当前 html 文件中的字符串生成一串 `hash `值，此值前面在加上下划线之后即为自定义属性。
 
 2. 为什么自定义属性前面要加上下划线？
 
