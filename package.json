@@ -16,7 +16,7 @@
     "url": "https://github.com/xuxusheng/html-attr-scope-loader/issues"
   },
   "homepage": "https://github.com/xuxusheng/html-attr-scope-loader#readme",
-  "devDependencies": {
+  "dependencies": {
     "css-attr-scope-loader": "^1.1.1",
     "extract-text-webpack-plugin": "^1.0.1",
     "loader-utils": "^0.2.15",
