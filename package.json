@@ -19,9 +19,15 @@
   "dependencies": {
     "css-attr-scope-loader": "^1.1.1",
     "extract-text-webpack-plugin": "^1.0.1",
+    "html-minifier": "^3.0.2",
     "loader-utils": "^0.2.15",
+    "parse5": "^2.2.0",
     "postcss": "^5.1.2",
     "postcss-scss": "^0.1.9",
     "precss": "^1.4.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.0.2"
   }
 }
