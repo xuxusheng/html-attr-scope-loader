@@ -3,18 +3,24 @@ var createHash = require('./lib/createHash')
 var parseHtml = require('./lib/parse')
 
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
-var loaderUtils = require('loader-utils');
+var loaderUtils = require('loader-utils')
+var minify = require('html-minifier').minify
 
-let ENV = process.env.npm_lifecycle_event;
-let isTest = ENV === 'test' || ENV === 'test-watch';
-let isProd = ENV === 'build' || ENV === 'release';
+let ENV = process.env.npm_lifecycle_event
+let isTest = ENV === 'test' || ENV === 'test-watch'
+let isProd = ENV === 'build' || ENV === 'release'
 
 module.exports = function (content) {
 
-    this.cacheable && this.cacheable();
-    var callback = this.async();
-    var query = loaderUtils.parseQuery(this.query);
+    this.cacheable && this.cacheable()
+    var callback = this.async()
+    var query = loaderUtils.parseQuery(this.query)
     var scopeLen = query.scopeLen || 10
+
+    content = minify(content, {
+        removeComments: true,
+        collapseWhitespace: true
+    })
 
     // 根据当前的 html 字符串创建一个 hash 值，作为自定义属性
     var scope = createHash(content, scopeLen)
@@ -29,10 +35,10 @@ module.exports = function (content) {
 
     var results = []
 
-    if(links.length !== 0) {
+    if (links.length !== 0) {
 
         // 如果html中存在 link 标签
-        links.forEach(function(link) {
+        links.forEach(function (link) {
 
             // 整理出 require() 中需要填入的字符串
             var loader = isTest ? 'null' : isProd ? ExtractTextPlugin.extract('style', 'css!css-attr-scope?scope=' + scope + '!postcss?parser=postcss-scss') : ExtractTextPlugin.extract('style', 'css?sourceMap!css-attr-scope?scope=' + scope + '!postcss?parser=postcss-scss')
