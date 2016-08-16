@@ -1,14 +1,10 @@
 'use strict'
 var createHash = require('./lib/createHash')
 var parseHtml = require('./lib/parse')
+var processLinks = require('./lib/processLinks')
 
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var loaderUtils = require('loader-utils')
 var minify = require('html-minifier').minify
-
-let ENV = process.env.npm_lifecycle_event
-let isTest = ENV === 'test' || ENV === 'test-watch'
-let isProd = ENV === 'build' || ENV === 'release'
 
 module.exports = function (content) {
 
@@ -35,23 +31,7 @@ module.exports = function (content) {
 
     var results = []
 
-    if (links.length !== 0) {
-
-        // 如果html中存在 link 标签
-        links.forEach(function (link) {
-
-            // 整理出 require() 中需要填入的字符串
-            var loader = isTest ? 'null' : isProd ? ExtractTextPlugin.extract('style', 'css!css-attr-scope?scope=' + scope + '!postcss?parser=postcss-scss') : ExtractTextPlugin.extract('style', 'css?sourceMap!css-attr-scope?scope=' + scope + '!postcss?parser=postcss-scss')
-
-            // 判断是否是 window 环境
-            loader = process.platform.indexOf('win') !== -1 ? loader.replace(/\\/g, '\\\\') : loader
-
-            // 将拼接好的 require() 规则存入 results 数组中
-            results.push(
-                'require(\'!' + loader + '!' + link + '\');'
-            )
-        })
-    }
+    if (links.length !== 0) results = processLinks(links, scope)
 
     results.push(
         'module.exports = ' + newHtml + ';'
