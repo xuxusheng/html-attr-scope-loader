@@ -15,16 +15,16 @@ var scope = 'scope'
 
 describe('处理 html 字符串', function () {
 
-    // it('不带 link 标签', function () {
-    //
-    //     var source = minify(fs.readFileSync(path.join(testCasesPath, 'withoutLink', 'source.html'), 'utf-8'), options)
-    //     var expected = fs.readFileSync(path.join(testCasesPath, 'withoutLink', 'expected.html'), 'utf-8')
-    //
-    //     var result = parse(source, scope)
-    //
-    //     expect(result.newHtml).to.equal(expected)
-    //     expect(result.links).to.be.empty
-    // })
+    it('不带 link 标签', function () {
+
+        var source = minify(fs.readFileSync(path.join(testCasesPath, 'withoutLink', 'source.html'), 'utf-8'), options)
+        var expected = fs.readFileSync(path.join(testCasesPath, 'withoutLink', 'expected.html'), 'utf-8')
+
+        var result = parse(source, scope)
+
+        expect(result.newHtml).to.equal(expected)
+        expect(result.links).to.be.empty
+    })
 
     it('带 link 标签', function () {
 
