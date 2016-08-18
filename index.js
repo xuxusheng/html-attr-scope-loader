@@ -27,7 +27,7 @@ module.exports = function (content) {
     var links = parseResults.links
 
     // newHtml 中存放最后 callback 中需要抛出的 html 字符串
-    var newHtml = JSON.stringify(parseResults.newHtml)
+    var newHtml = JSON.stringify(parseResults.newHtml).replace(/&quot;/g, '"')
 
     var results = []
 
