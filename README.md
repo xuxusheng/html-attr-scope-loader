@@ -1,5 +1,7 @@
 # html-attr-scope-loader
 
+> 文档更新时版本为 v1.4.3
+
 webpack的自定义loader模块，给html文件中标签加入自定义属性以起到隔离作用域的作用，依赖于 css-attr-scope-loader
 
 css-attr-scope-loader 模块参考：http://github.com/xuxusheng/css-attr-scope-loader
@@ -82,10 +84,12 @@ div#article > ul[_7c1ac95d75]::before ~ li[_7c1ac95d75], .xusheng[_7c1ac95d75]::
 ### 二、参数：
 
 ```javascript
-loader: 'html-attr-scope?scopeLen=10'
+loader: 'html-attr-scope?scopeLen=10&sourceMap'
 ```
 
 **scopeLen:** 表示所生成的自定义属性（hash值）的长度，默认为10，可以省略。
+
+**sourceMap:** 开启 css-loader 的 sourceMap 功能
 
 ---
 
@@ -170,6 +174,14 @@ html 文件和其所引入的 css 文件会被标记上同样的自定义属性`
  .xusheng::after[_xxxxxxxxxx] {}
  ```
  所以在遇到伪元素的时候，会将属性选择器向前移动一位，不在最后，如：`.xusheng[_xxxxxxxxxx]::after`。因为对伪类以及伪元素的判定是基于一个冒号还是两个冒号的，所以在使用伪元素时尽量使用规范的两个冒号，尽管一个冒号浏览器也可以识别。
+ 
+ 6. 配合 angular 使用时，不要在 ng-src 中写相对路径来引用文件，比如：
+ 
+ ```
+ <img ng-src="./avatar.png">
+ ```
+  
+ loaer在遇到 ng-src 属性时会忽略掉，并不会解析，注意！。
 
 ---
 
