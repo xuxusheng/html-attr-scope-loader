@@ -46,7 +46,7 @@ module.exports = function (content) {
     var imgSrcMap = parseResults.imgSrcMap
 
     // newHtml 中存放最后 callback 中需要抛出的 html 字符串
-    var newHtml = JSON.stringify(parseResults.newHtml)
+    var newHtml = parseResults.newHtml
 
     // 判断 config 中是否存在 布尔类型 的 minimize 属性，
     if (typeof config.minimize === 'boolean' ? config.minimize : this.minimize) {
@@ -75,6 +75,8 @@ module.exports = function (content) {
 
         newHtml = minify(newHtml, minimizeOptions);
     }
+
+    newHtml = JSON.stringify(newHtml)
 
     var results = []
 
